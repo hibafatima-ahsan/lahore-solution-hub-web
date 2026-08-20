@@ -109,8 +109,12 @@ lahore-solutions-hub/
 
 
 
+## 👩‍💻 Author
 
--------------------
-## Author
+### HIBA FATIMA
 
-**HIBA FATIMA**
+**Project:** Lahore Solutions Hub  
+**Category:** Civic Technology / Community Platform  
+**Focus:** Lahore, Pakistan 🇵🇰
+
+Built with ❤️ for the people of Lahore.
