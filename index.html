@@ -1,0 +1,268 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lahore Solutions Hub - People's Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="city-icon">🏛️</span>
+                <h1>Lahore Solutions Hub</h1>
+                <span class="subtitle">People-People-For People</span>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-tab="dashboard"><i class="fas fa-chart-line"></i> Dashboard</button>
+                <button class="nav-btn" data-tab="report"><i class="fas fa-plus-circle"></i> Report Issue</button>
+                <button class="nav-btn" data-tab="solutions"><i class="fas fa-lightbulb"></i> Solutions</button>
+                <button class="nav-btn" data-tab="community"><i class="fas fa-users"></i> Community</button>
+                <button class="nav-btn" data-tab="about"><i class="fas fa-info-circle"></i> About</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- DASHBOARD TAB -->
+            <section id="dashboard" class="tab-content active">
+                <div class="welcome-banner">
+                    <h2>🇵🇰 Lahore's Voice</h2>
+                    <p>Together we solve, together we grow</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Total Issues</h3>
+                        <p id="totalIssues">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Solutions Proposed</h3>
+                        <p id="activeSolutions">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-fire"></i>
+                        <h3>Most Urgent</h3>
+                        <p id="mostUrgent">-</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-thumbs-up"></i>
+                        <h3>Total Votes</h3>
+                        <p id="totalVotes">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-comments"></i>
+                        <h3>Feedback</h3>
+                        <p id="totalFeedback">0</p>
+                    </div>
+                </div>
+
+                <div class="charts-row">
+                    <div class="chart-container">
+                        <h2>Issues by Category</h2>
+                        <canvas id="priorityChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h2>Solutions Popularity</h2>
+                        <canvas id="solutionsChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="issue-list">
+                    <h2>Top Community Issues</h2>
+                    <ul id="issueList"></ul>
+                </div>
+            </section>
+
+            <!-- REPORT TAB -->
+            <section id="report" class="tab-content">
+                <h2><i class="fas fa-flag"></i> Report an Issue in Lahore</h2>
+                <form id="issueForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="issueTitle">Issue Title</label>
+                            <input type="text" id="issueTitle" required placeholder="e.g. Water shortage in Gulberg">
+                        </div>
+                        <div class="form-group">
+                            <label for="issueCategory">Category</label>
+                            <select id="issueCategory" required>
+                                <option value="">Select category</option>
+                                <option value="Infrastructure">Infrastructure</option>
+                                <option value="Education">Education</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Economy">Economy</option>
+                                <option value="Environment">Environment</option>
+                                <option value="Security">Security</option>
+                                <option value="Governance">Governance</option>
+                                <option value="Traffic">Traffic</option>
+                                <option value="Waste Management">Waste Management</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="issueLocation">Location (Area/Sector)</label>
+                            <input type="text" id="issueLocation" required placeholder="e.g. DHA Phase 5, Johar Town">
+                        </div>
+                        <div class="form-group">
+                            <label for="issuePriority">Priority (1-10)</label>
+                            <input type="number" id="issuePriority" min="1" max="10" value="5" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="issueDescription">Description</label>
+                        <textarea id="issueDescription" required rows="4" placeholder="Describe the issue in detail..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="issueSuggestion">Your Proposed Solution (Optional)</label>
+                        <textarea id="issueSuggestion" rows="3" placeholder="If you have a solution suggestion..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reporterName">Your Name</label>
+                        <input type="text" id="reporterName" placeholder="Share your name (optional)">
+                    </div>
+                    <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Submit Issue</button>
+                </form>
+            </section>
+
+            <!-- SOLUTIONS TAB -->
+            <section id="solutions" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-lightbulb"></i> Community Solutions</h2>
+                    <p>Proposed by people like you</p>
+                </div>
+                <div class="solution-filters">
+                    <button class="filter-btn active" data-filter="all">All Solutions</button>
+                    <button class="filter-btn" data-filter="Infrastructure">Infrastructure</button>
+                    <button class="filter-btn" data-filter="Education">Education</button>
+                    <button class="filter-btn" data-filter="Healthcare">Healthcare</button>
+                    <button class="filter-btn" data-filter="Economy">Economy</button>
+                    <button class="filter-btn" data-filter="Environment">Environment</button>
+                    <button class="filter-btn" data-filter="Security">Security</button>
+                    <button class="filter-btn" data-filter="Traffic">Traffic</button>
+                </div>
+                <div id="solutionsList" class="solutions-grid"></div>
+            </section>
+
+            <!-- COMMUNITY TAB -->
+            <section id="community" class="tab-content">
+                <h2><i class="fas fa-users"></i> Community Engagement</h2>
+                <div class="community-stats">
+                    <div class="community-stat">
+                        <i class="fas fa-user-plus"></i>
+                        <span id="communityMembers">156</span>
+                        <label>Active Members</label>
+                    </div>
+                    <div class="community-stat">
+                        <i class="fas fa-comment"></i>
+                        <span id="communityFeedback">42</span>
+                        <label>Feedback Received</label>
+                    </div>
+                    <div class="community-stat">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span id="communitySolutions">28</span>
+                        <label>Solutions Implemented</label>
+                    </div>
+                </div>
+                
+                <div class="feedback-section">
+                    <h3>Latest Community Feedback</h3>
+                    <div id="feedbackList" class="feedback-grid"></div>
+                    <div class="feedback-form">
+                        <h4>Share Your Feedback</h4>
+                        <form id="feedbackForm">
+                            <div class="form-group">
+                                <textarea id="feedbackText" rows="3" placeholder="Share your thoughts about any issue or solution..."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" id="feedbackName" placeholder="Your name (optional)">
+                                </div>
+                                <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Post Feedback</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="voting-section">
+                    <h3>Cast Your Vote</h3>
+                    <p>Vote for the most important issues and solutions</p>
+                    <div id="votingOptions" class="voting-grid"></div>
+                </div>
+            </section>
+
+            <!-- ABOUT TAB -->
+            <section id="about" class="tab-content">
+                <h2><i class="fas fa-info-circle"></i> About Lahore Solutions Hub</h2>
+                <div class="about-content">
+                    <div class="about-hero">
+                        <h3>People-People-For People</h3>
+                        <p>Lahore Solutions Hub is a citizen-led initiative to solve Lahore's challenges through collective intelligence and community engagement.</p>
+                    </div>
+                    
+                    <div class="mission-box">
+                        <h3>Our Mission</h3>
+                        <p>To empower every Lahori to become a problem-solver by providing a platform to report issues, propose solutions, and collaborate with fellow citizens.</p>
+                    </div>
+
+                    <div class="stats-highlights">
+                        <div class="highlight">
+                            <span class="number" id="aboutIssues">0</span>
+                            <span class="label">Issues Tracked</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="number" id="aboutVotes">0</span>
+                            <span class="label">Votes Cast</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="number" id="aboutSolutions">0</span>
+                            <span class="label">Solutions Proposed</span>
+                        </div>
+                        <div class="highlight">
+                            <span class="number" id="aboutFeedback">0</span>
+                            <span class="label">Feedback Received</span>
+                        </div>
+                    </div>
+
+                    <div class="how-it-works">
+                        <h3>How It Works</h3>
+                        <div class="steps">
+                            <div class="step">
+                                <span class="step-number">1</span>
+                                <h4>Report</h4>
+                                <p>Share issues you face in your area</p>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">2</span>
+                                <h4>Vote</h4>
+                                <p>Vote on issues that matter most</p>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">3</span>
+                                <h4>Solution</h4>
+                                <p>Propose and discuss solutions</p>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">4</span>
+                                <h4>Act</h4>
+                                <p>Community takes collective action</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>🏛️ Lahore Solutions Hub — People-People-For People 🇵🇰</p>
+            <p class="footer-tagline">Together we solve, together we grow</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
